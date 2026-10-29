@@ -1,0 +1,16 @@
+{
+  "name": "@delivery-receipt/verify",
+  "version": "0.1.0",
+  "description": "Zero-dependency verifier for x402 Delivery Receipts (buyer side).",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test --import tsx test/*.test.ts"
+  }
+}

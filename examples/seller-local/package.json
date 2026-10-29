@@ -1,0 +1,15 @@
+{
+  "name": "seller-local",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/run.ts",
+    "test": "node --test --import tsx test/*.test.ts"
+  },
+  "dependencies": {
+    "@delivery-receipt/seller": "0.1.0",
+    "@delivery-receipt/verify": "0.1.0",
+    "viem": "^2.57.13"
+  }
+}

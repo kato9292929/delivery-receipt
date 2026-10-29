@@ -1,0 +1,21 @@
+{
+  "name": "@delivery-receipt/seller",
+  "version": "0.1.0",
+  "description": "Seller-side x402 Delivery Receipts: sign receipts for paid responses and serve refetches without re-settling.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test --import tsx test/*.test.ts"
+  },
+  "dependencies": {
+    "@delivery-receipt/verify": "0.1.0",
+    "@solana/kit": "^8.6.0",
+    "viem": "^2.57.13"
+  }
+}
