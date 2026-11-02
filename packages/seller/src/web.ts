@@ -1,4 +1,4 @@
-import { RECEIPT_HEADER, REFETCH_HEADER } from "@delivery-receipt/verify";
+import { RECEIPT_HEADER, REFETCH_HEADER } from "@x402jp/delivery-receipt-verify";
 import type { ReceiptSeller } from "./core.js";
 import { EXPOSE_HEADERS } from "./core.js";
 import { PAYMENT_HEADERS, PAYMENT_RESPONSE_HEADERS, decodeSettleResponse, pickHeader } from "./payment.js";

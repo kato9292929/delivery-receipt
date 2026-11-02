@@ -68,4 +68,4 @@ export {
   WELL_KNOWN_PATH,
   type Receipt,
   type WellKnown,
-} from "@delivery-receipt/verify";
+} from "@x402jp/delivery-receipt-verify";

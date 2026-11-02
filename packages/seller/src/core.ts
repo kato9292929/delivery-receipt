@@ -10,7 +10,7 @@ import {
   type ReceiptPayload,
   type WellKnown,
   type WellKnownKey,
-} from "@delivery-receipt/verify";
+} from "@x402jp/delivery-receipt-verify";
 import { createDefaultChainVerifier } from "./chain.js";
 import { deriveKeyId, loadSigningKey, signPayload, type SigningKey } from "./keys.js";
 import {

@@ -1,16 +1,41 @@
 {
-  "name": "@delivery-receipt/verify",
+  "name": "@x402jp/delivery-receipt-verify",
   "version": "0.1.0",
   "description": "Zero-dependency verifier for x402 Delivery Receipts (buyer side).",
   "type": "module",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "test": "node --test --import tsx test/*.test.ts"
-  }
+    "test": "node --test --import tsx test/*.test.ts",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kato9292929/delivery-receipt.git",
+    "directory": "packages/verify"
+  },
+  "keywords": [
+    "x402",
+    "delivery-receipt",
+    "usdc",
+    "payments"
+  ]
 }

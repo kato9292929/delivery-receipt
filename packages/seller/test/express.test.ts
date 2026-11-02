@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { AddressInfo } from "node:net";
 import express from "express";
-import { fetchWellKnown, refetch, verifyReceipt, RECEIPT_HEADER, REFETCH_HEADER } from "@delivery-receipt/verify";
+import { fetchWellKnown, refetch, verifyReceipt, RECEIPT_HEADER, REFETCH_HEADER } from "@x402jp/delivery-receipt-verify";
 import {
   createReceiptSeller,
   MemoryStore,

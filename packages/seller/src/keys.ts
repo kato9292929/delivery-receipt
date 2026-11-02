@@ -1,5 +1,5 @@
 import { createHash, createPrivateKey, createPublicKey, sign, type KeyObject } from "node:crypto";
-import { base64urlEncode, receiptSigningBytes, type ReceiptPayload } from "@delivery-receipt/verify";
+import { base64urlEncode, receiptSigningBytes, type ReceiptPayload } from "@x402jp/delivery-receipt-verify";
 
 /** DER prefix of a PKCS8 Ed25519 private key; the 32-byte seed follows. */
 const PKCS8_ED25519_PREFIX = Buffer.from("302e020100300506032b657004220420", "hex");

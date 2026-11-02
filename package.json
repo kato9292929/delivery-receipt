@@ -11,10 +11,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run build && npm run test --workspaces --if-present",
     "typecheck": "tsc -p tsconfig.json",
     "keygen": "tsx scripts/keygen.ts",
-    "example": "npm run start -w examples/seller-local"
+    "example": "npm run start -w examples/seller-local",
+    "build": "npm run build -w packages/verify && npm run build -w packages/seller"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

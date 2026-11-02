@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { verifyReceipt, decodeReceipt, RECEIPT_HEADER, REFETCH_HEADER, type WellKnown } from "@delivery-receipt/verify";
+import { verifyReceipt, decodeReceipt, RECEIPT_HEADER, REFETCH_HEADER, type WellKnown } from "@x402jp/delivery-receipt-verify";
 import {
   createReceiptSeller,
   MemoryStore,

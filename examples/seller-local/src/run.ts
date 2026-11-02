@@ -4,7 +4,7 @@
  *
  *   npm run example
  */
-import { refetch, type RefetchResult } from "@delivery-receipt/verify";
+import { refetch, type RefetchResult } from "@x402jp/delivery-receipt-verify";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { buildPaymentHeader } from "./mock.ts";
 import { startLocalSeller, type LocalSeller } from "./server.ts";

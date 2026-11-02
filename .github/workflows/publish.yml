@@ -1,0 +1,28 @@
+name: publish (npm)
+# Publishes @x402jp/delivery-receipt-verify and -seller when a tag v* is pushed.
+# Needs the repository secret NPM_TOKEN (an npm automation token of the @x402jp org).
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write # npm provenance
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - name: Publish (verify first: seller depends on it)
+        run: |
+          npm publish -w packages/verify --access public
+          npm publish -w packages/seller --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
