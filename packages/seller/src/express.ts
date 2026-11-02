@@ -9,7 +9,7 @@
  *   app.get("/api/report", handler);
  */
 import type { IncomingMessage, OutgoingHttpHeaders, ServerResponse } from "node:http";
-import { RECEIPT_HEADER, REFETCH_HEADER } from "@delivery-receipt/verify";
+import { RECEIPT_HEADER, REFETCH_HEADER } from "@x402jp/delivery-receipt-verify";
 import { EXPOSE_HEADERS, type ReceiptSeller } from "./core.js";
 import { PAYMENT_HEADERS, PAYMENT_RESPONSE_HEADERS, decodeSettleResponse, pickHeader } from "./payment.js";
 import type { PaymentRequirement } from "./types.js";

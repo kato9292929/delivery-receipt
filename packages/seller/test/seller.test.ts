@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { generateKeyPairSync } from "node:crypto";
-import { encodeReceipt, verifyReceipt, decodeReceipt } from "@delivery-receipt/verify";
+import { encodeReceipt, verifyReceipt, decodeReceipt } from "@x402jp/delivery-receipt-verify";
 import { createReceiptSeller, deriveKeyId, loadSigningKey, MemoryStore } from "../src/index.ts";
 import { MockChain, RESOURCE, newSeed } from "./helpers.ts";
 

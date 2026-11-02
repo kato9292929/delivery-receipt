@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fetchWellKnown, refetch, verifyReceipt, RECEIPT_HEADER } from "@delivery-receipt/verify";
+import { fetchWellKnown, refetch, verifyReceipt, RECEIPT_HEADER } from "@x402jp/delivery-receipt-verify";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { buildPaymentHeader } from "../src/mock.ts";
 import { scenario402BeforeSettle, scenarioCutAfterSettle } from "../src/run.ts";

@@ -18,7 +18,7 @@ import {
   wellKnownResponse,
   withDeliveryReceipts,
   type ReceiptSeller,
-} from "@delivery-receipt/seller";
+} from "@x402jp/delivery-receipt-seller";
 import { MockChain, MockFacilitator, requirement, type ExactEvmPayload } from "./mock.ts";
 
 export type Mode = "normal" | "cut-after-settle" | "402-before-settle";

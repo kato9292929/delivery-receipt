@@ -1,5 +1,5 @@
 /**
- * @delivery-receipt/verify
+ * @x402jp/delivery-receipt-verify
  *
  * Buyer-side verifier for x402 Delivery Receipts.
  *

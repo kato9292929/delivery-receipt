@@ -10,14 +10,26 @@ x402（HTTP 402 / USDC）で **支払ったのに本文が届かなかった** �
 
 | パス | 内容 |
 | --- | --- |
-| `packages/verify` (`@delivery-receipt/verify`) | 買い手側の検証・再取得。**実行時依存ゼロ**（`node:crypto` と `fetch` のみ）、`src/index.ts` 1 ファイル。 |
-| `packages/seller` (`@delivery-receipt/seller`) | 売り手側。署名・記録・再取得処理、Web 標準アダプタ（Next.js）、Express アダプタ、ストア、チェーン照会。 |
+| `packages/verify`（npm `@x402jp/delivery-receipt-verify`） | 買い手側の検証・再取得。**実行時依存ゼロ**（`node:crypto` と `fetch` のみ）、`src/index.ts` 1 ファイル。 |
+| `packages/seller`（npm `@x402jp/delivery-receipt-seller`） | 売り手側。署名・記録・再取得処理、Web 標準アダプタ（Next.js）、Express アダプタ、ストア、チェーン照会。 |
 | `examples/seller-local` | モック facilitator / モックチェーンで 2 つの障害を再現するローカル売り手。 |
+
+## 組み込み手順
+
+売り手（x402 のミドルウェアを使っている API）に入れる手順です。どこか1つでも省くと、レシートの検証か再取得が通りません。
+
+1. `npm install @x402jp/delivery-receipt-seller`
+2. 署名鍵を作る：`node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`。出た値を環境変数 `RECEIPT_SIGNING_KEY` に入れる（リポジトリには置かない）。鍵が無いとサーバは起動しません。
+3. 配送記録の保存先を決める：サーバレス（Vercel など）なら `UpstashStore`、常駐サーバなら `FileStore` でもよい。最低 24 時間、既定 7 日残す。
+4. 有料ルートを `withDeliveryReceipts`（Web 標準・Next.js）か、Express なら `receiptRefetch`（x402 ゲートの前）と `receiptRecorder`（後ろ）で包む。下の例を参照。
+5. `GET /.well-known/x402-receipt.json` を `wellKnownResponse(seller)` で出す。
+6. CORS：`X-Payment-Refetch` を Allow-Headers に、`X-Delivery-Receipt` を Expose-Headers に足す。
+7. 確かめる：https://probe.x402jp.com/check に有料ルートの URL を入れると、Delivery Receipt の項目が OK になる。
 
 ## 使い方（Next.js route handler）
 
 ```ts
-import { createReceiptSeller, UpstashStore, withDeliveryReceipts, wellKnownResponse } from "@delivery-receipt/seller";
+import { createReceiptSeller, UpstashStore, withDeliveryReceipts, wellKnownResponse } from "@x402jp/delivery-receipt-seller";
 
 const seller = createReceiptSeller({
   store: new UpstashStore({ url: process.env.UPSTASH_REDIS_REST_URL!, token: process.env.UPSTASH_REDIS_REST_TOKEN! }),
@@ -35,7 +47,7 @@ export const GET = withDeliveryReceipts(seller, {
 買い手:
 
 ```ts
-import { refetch } from "@delivery-receipt/verify";
+import { refetch } from "@x402jp/delivery-receipt-verify";
 const r = await refetch({ url, paymentHeaders: { "PAYMENT-SIGNATURE": header }, paymentId });
 if (r.ok) use(r.body); else console.log(r.reason); // refetch_expired / refetch_refused / receipt_*
 ```

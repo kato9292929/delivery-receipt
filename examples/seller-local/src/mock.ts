@@ -5,7 +5,7 @@
 import { randomBytes } from "node:crypto";
 import { verifyTypedData, type Hex } from "viem";
 import type { PrivateKeyAccount } from "viem/accounts";
-import type { ChainVerifier, FindPaymentInput, FindPaymentResult, PaymentRequirement } from "@delivery-receipt/seller";
+import type { ChainVerifier, FindPaymentInput, FindPaymentResult, PaymentRequirement } from "@x402jp/delivery-receipt-seller";
 
 export const BASE_USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 
