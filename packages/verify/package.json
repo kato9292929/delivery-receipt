@@ -1,14 +1,16 @@
 {
   "name": "@x402jp/delivery-receipt-verify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zero-dependency verifier for x402 Delivery Receipts (buyer side).",
   "type": "module",
   "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=20"
