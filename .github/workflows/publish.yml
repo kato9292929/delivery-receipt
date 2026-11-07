@@ -1,13 +1,19 @@
 name: publish (npm)
-# Publishes @x402jp/delivery-receipt-verify and -seller when a tag v* is pushed.
+# Publishes @x402jp/delivery-receipt-verify and -seller from main: any package whose version in
+# package.json is not on npm yet is published (verify first: seller depends on it). Bump the
+# version in a PR; merging it publishes. Tags v* also run it.
 # Needs the repository secret NPM_TOKEN (an npm automation token of the @x402jp org).
 on:
   push:
+    branches: [main]
     tags: ["v*"]
   workflow_dispatch:
 permissions:
   contents: read
   id-token: write # npm provenance
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -20,9 +26,16 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run typecheck
-      - name: Publish (verify first: seller depends on it)
+      - name: Publish versions not on npm yet
         run: |
-          npm publish -w packages/verify --access public
-          npm publish -w packages/seller --access public
+          for p in packages/verify packages/seller; do
+            name=$(node -p "require('./$p/package.json').name")
+            version=$(node -p "require('./$p/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then
+              echo "$name@$version is already on npm"
+            else
+              npm publish -w "$p" --access public
+            fi
+          done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
