@@ -8,8 +8,8 @@
     "test": "node --test --import tsx test/*.test.ts"
   },
   "dependencies": {
-    "@x402jp/delivery-receipt-seller": "0.1.0",
-    "@x402jp/delivery-receipt-verify": "0.1.0",
+    "@x402jp/delivery-receipt-seller": "0.1.1",
+    "@x402jp/delivery-receipt-verify": "0.1.1",
     "viem": "^2.57.13"
   }
 }
