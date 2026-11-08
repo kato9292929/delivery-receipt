@@ -2,7 +2,8 @@ name: publish (npm)
 # Publishes @x402jp/delivery-receipt-verify and -seller from main: any package whose version in
 # package.json is not on npm yet is published (verify first: seller depends on it). Bump the
 # version in a PR; merging it publishes. Tags v* also run it.
-# Needs the repository secret NPM_TOKEN (an npm automation token of the @x402jp org).
+# Published through npm Trusted Publishing (GitHub Actions OIDC): no token. Each package must
+# list this repository and publish.yml as its Trusted Publisher on npmjs.com.
 on:
   push:
     branches: [main]
@@ -21,8 +22,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@^11.10.0 # Trusted Publishing needs npm >= 11.5.1
       - run: npm ci
       - run: npm test
       - run: npm run typecheck
@@ -37,5 +39,3 @@ jobs:
               npm publish -w "$p" --access public
             fi
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
